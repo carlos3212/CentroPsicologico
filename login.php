@@ -5,7 +5,7 @@ if (isset($_SESSION['usuario'])){
 }
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	$usuario = filter_var(strtolower($_POST['usuario']),FILTER_SANITIZE_STRING);
+	$usuario =  $_POST['usuario'];
 	$password = $_POST['password'];
 	$password = hash('sha512', $password);
 	$errores ='';	
@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		echo "Error: ". $e->getMessage();
 	}
 	$statement = $conexion -> prepare(
-			'SELECT * FROM usuarios WHERE usuario = :usuario AND pass= :password');
+			'SELECT * FROM medicos WHERE medidentificacion= :usuario AND pass= :password');
 
 	$statement ->execute(array(':usuario'=> $usuario,':password'=> $password));
 

@@ -1,4 +1,6 @@
-<?php include 'plantillas/header.php'; ?>
+<?php include 'plantillas/header.php'; 
+   
+	 ?>
 	<section class="main">
 		<div class="wrapp">
 			<?php include 'plantillas/nav.php'; ?>
@@ -7,7 +9,8 @@
 						<h2>MEDICOS</h2>
 					</div>
 					<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-						<h2>Agregar Pacientes</h2>
+				
+					<h2>Agregar Pacientes</h2>
 						<input required type="numeric" name="identificacion" placeholder="identificación:">
 						<input required type="text" name="nombres" placeholder="Nombres:">
 						<input required type="text" name="apellidos" placeholder="Apellidos:">

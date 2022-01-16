@@ -32,7 +32,7 @@ if(!$consulta){
 							<th>Apellidos</th>
 							<th>Fecha Nacimiento</th>
 							<th>Sexo</th>
-							<th colspan="2">Opciones</th>
+							<th colspan="3">Opciones</th>
 						  </tr>
 						<?php foreach ($consulta as $Sql): ?>
 						<tr>
@@ -41,10 +41,10 @@ if(!$consulta){
 							<?php echo "<td>". $Sql['pacApellidos']. "</td>"; ?>
 							<?php echo "<td>". $Sql['pacFechaNacimiento']. "</td>"; ?>
 							<?php echo "<td>". $Sql['pacSexo']. "</td>"; ?>
-                            <?php echo "<td class='centrar'>"."<a href='actualizarpaciente.php?idPaciente=".$Sql['idPaciente']."' class='editar'>Editar</a>". "</td>"; ?>
+							<?php echo "<td class='centrar'>"."<a href='historia_cli_user.php?idPaciente=".$Sql['idPaciente']."' class='editar'>Historia Cli</a>". "</td>"; ?>
+						    <?php echo "<td class='centrar'>"."<a href='actualizarpaciente.php?idPaciente=".$Sql['idPaciente']."' class='editar'>Editar</a>". "</td>"; ?>
                            <?php echo "<td class='centrar'>"."<a href='eliminar_paciente.php?idPaciente=".$Sql['idPaciente']."' class='eliminar'>Eliminar</a>". "</td>"; ?>
-						   <?php echo "<td class='centrar'>"."<a href='eliminar_paciente.php?idPaciente=".$Sql['idPaciente']."' class='eliminar'>Ficha</a>". "</td>"; ?>
-						
+						 
 						</tr>
 						<?php endforeach; ?>
 					</table>

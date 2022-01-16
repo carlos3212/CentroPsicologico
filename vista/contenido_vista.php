@@ -1,6 +1,34 @@
-<?php include 'plantillas/header.php'; 
 
+<?php /*
+$busca =$_SESSION['usuario'];
+$mensaje='';
+try{
+	$conexion = new PDO('mysql:host=localhost;dbname=centromedico','root','');
+}catch(PDOException $e){
+	echo "Error: ". $e->getMessage();
+}
+
+$consulta = $conexion -> prepare("
+SELECT * FROM `medicos` WHERE medidentificacion = $busca");
+
+$consulta ->execute();
+$consulta = $consulta ->fetchAll();
+if(!$consulta){
+	$mensaje .= 'NO HAY CITAS PARA MOSTRAR';
+}
+ foreach ($consulta as $Sql): 
+	
+		echo $Sql['medidentificacion'];
+		
+		
+	
+	 endforeach
+	 
 ?>
+
+*/
+
+ include 'plantillas/header.php'; ?>
 
 	<section class="main">
 		<div class="wrapp">
