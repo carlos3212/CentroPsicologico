@@ -78,6 +78,39 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`,`usuario`,`pass`,`nombres`,`apellidos`,`Roll`) VALUES 
  (1,'admin','d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db','Elvis','Mancilla','admin');
 
+
+CREATE TABLE `historiaclinica` (
+  `idHistoria` int(11) NOT NULL AUTO_INCREMENT,
+  `hisPsicAsignado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisServicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisNumHistoria` int(255) NOT NULL,
+  `hisPerSolicita` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisParentesco` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisNombrePaciente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisFechaNacimiento` date NOT NULL,
+  `hisCiPaciente` int(10) NOT NULL,
+  `hisEdadPaciente` int(3) NOT NULL,
+  `pacSexo` enum('Femenino','Masculino','Otro') COLLATE utf8_spanish_ci NOT NULL,
+  `hisEstCivil` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisEscolaridad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisInsEducativa` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisOcupacion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisInsLaboral` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisDireccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `hisTelefono` int(10) NOT NULL,
+  `hisFechaPropuesta` date NOT NULL,
+  `hisHorario` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
+  `hisValor` float(3,2) NOT NULL,
+  `hisMotivoCons` varchar(1000) COLLATE utf8_spanish_ci NOT NULL,
+  `hisVida` varchar (1000) COLLATE utf8_spanish_ci NOT NULL,
+  `hisProgramaTra`  varchar (1000) COLLATE utf8_spanish_ci NOT NULL, 
+  PRIMARY KEY (`idHistoria`),
+  UNIQUE KEY `hisNumHistoria` (`hisNumHistoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+
+
 ALTER TABLE `citas`
   MODIFY `idcita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;

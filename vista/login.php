@@ -9,8 +9,8 @@
 </head>
 <body>
 	<form class="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" name="login">
-        <h2>CenterMedicine</h2>
-        <img src="img/icono.svg">
+        <h2>Psicoludic</h2>
+        <img src="img/psicoludic.png">
         <input type="text" name="usuario"placeholder="Usuario" class="bordes" autofocus/>
         <input type="password" name="password" placeholder="Contraseña" class="bordes"/>
         <input type="submit" value="Ingresar"></input>

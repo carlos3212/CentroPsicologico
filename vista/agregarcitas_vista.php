@@ -1,10 +1,20 @@
 <?php
+ // Obteniendo la fecha actual del sistema con PHP
+ $fechaActual = date('d-m-Y');
+ 
 $mensaje='';
 try{
 	$conexion = new PDO('mysql:host=localhost;dbname=centromedico','root','');
 }catch(PDOException $e){
 	echo "Error: ". $e->getMessage();
 }
+//SELECT PARA CONSULTORIOS
+$consultorio = $conexion -> prepare("SELECT * FROM consultorios");
+
+$consultorio ->execute();
+$consultorio = $consultorio ->fetchAll();
+if(!$consultorio)
+	$mensaje .= 'No hay consultorios, por favor registre primero! <br />';
 //SELECT PARA MEDICOS
 $medicos = $conexion -> prepare("SELECT * FROM medicos");
 
@@ -12,66 +22,42 @@ $medicos ->execute();
 $medicos = $medicos ->fetchAll();
 if(!$medicos)
 	$mensaje .= 'No hay medicos, por favor registre primero! <br />';
-//SELECT PARA CONSULTORIOS
-$consultorios = $conexion -> prepare("SELECT * FROM consultorios");
 
-$consultorios ->execute();
-$consultorios = $consultorios ->fetchAll();
-if(!$consultorios)
-	$mensaje .= 'No hay consultorios, por favor registre primero! <br />';
-//SELECT PARA PACIENTES
-$pacientes = $conexion -> prepare("SELECT * FROM pacientes");
-
-$pacientes ->execute();
-$pacientes = $pacientes ->fetchAll();
-if(!$pacientes)
-	$mensaje .= 'No hay pacientes, por favor registre primero! <br />';
-
-?>
-<?php include 'plantillas/header.php'; ?>
+include 'plantillas/header.php'; ?>
 	<section class="main">
 		<div class="wrapp">
 			<?php include 'plantillas/nav.php'; ?>
 				<article>
 					<div class="mensaje">
-						<h2>CITAS</h2>
+						<h2>MEDICOS</h2>
 					</div>
 					<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-						<h2>Agregar Citas</h2>
-						<label>Fecha:</label>
-                        <input type="date" name="fecha" placeholder="Fecha:" required/>
-                        <label>Hora:</label>
-                        <input type="time" name="hora" value="11:45" max="20:30" min="08:00" step="60" required>
-                        <label>Paciente:</label>
-                        <select name="paciente" class="mayusculas" required> 
-	                        <?php foreach ($pacientes as $Sql2): ?>
-							<?php echo "<option value='". $Sql2['pacNombre']. "'>". $Sql2['pacNombre']."</option>"; ?>
+						<h2>Agregar Cita</h2>
+						<input required type="numeric" name="identificacion" placeholder="identificación:">
+						<input required type="text" name="nombres" placeholder="Nombres:">
+						<input required type="text" name="apellidos" placeholder="Apellidos:">
+						<input type="date" name="fechaCita" min="2022-01-14" placeholder="Fecha Cita:">
+						<input required type="text" name="hora" placeholder="Hora:">
+						<select name="consultorio" class="mayusculas" required> 
+	                        <?php foreach ($consultorio as $Sql2): ?>
+							<?php echo "<option value='". $Sql2['conNombre']. "'>". $Sql2['conNombre']."</option>"; ?>
 							<?php endforeach; ?>
                         </select>
-                        <label>Medicos:</label>
-                        <select name="medico" class="mayusculas" required> 
+						<select name="medico" class="mayusculas" required> 
 	                        <?php foreach ($medicos as $Sql): ?>
 							<?php echo "<option value='". $Sql['mednombres']. "'>". $Sql['mednombres']." ". $Sql['medapellidos']. "</option>"; ?>
 							<?php endforeach; ?>
                         </select>
-                        <label>Consultorios:</label>
-                        <select name="consultorio" class="mayusculas" required> 
-	                        <?php foreach ($consultorios as $Sql2): ?>
-							<?php echo "<option value='". $Sql2['conNombre']. "'>". $Sql2['conNombre']."</option>"; ?>
-							<?php endforeach; ?>
+						<select name="estado">
+                            <option value="Asignado">Asignado</option>
+							<option value="Atendido">Atendido</option> 
                         </select>
-                        <label>Estado:</label required>
-                        <select name="estado">
-                        	<option value="asignado">Asignado</option>
-                        	<option value="atendido">Atendido</option>                    	
-                        </select>
-                        <label>Observaciones:</label>
-                        <textarea placeholder="Observacion:" name="observaciones"></textarea>
-						<input type="submit" name="enviar" value="Agregar Consultorio">
+						<input type="submit" name="enviar" value="Agregar Cita">
+						
 					</form>
-						<?php  if(!empty($mensaje)): ?>
+						<?php  if(!empty($errores)): ?>
 							<ul>
-							  <?php echo $mensaje; ?>
+							  <?php echo $errores; ?>
 							</ul>
 						<?php  endif; ?>
 				</article>

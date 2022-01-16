@@ -36,13 +36,22 @@ if(!$especialidad)
 						<input required type="numeric" name="identificacion" placeholder="identificación:">
 						<input required type="text" name="nombres" placeholder="Nombres:">
 						<input required type="text" name="apellidos" placeholder="Apellidos:">
-						<input type="email" name="correo" placeholder="Correo:">
-						<input type="numeric" name="telefono" placeholder="Telefono:">
 						<select name="especialidad">  
                         <?php foreach ($especialidad as $Sql): ?>
 						<?php echo "<option value='". $Sql['espNombre']. "'>". $Sql['espNombre']. "</option>"; ?>
 						<?php endforeach; ?>
 						</select>
+						<input type="numeric" name="telefono" placeholder="Telefono:">
+						<input type="text" name="password" placeholder="Contraseña" />
+                            <input type="text" name="password2" placeholder="Repita su contraseña" />
+                          
+						<input type="email" name="correo" placeholder="Correo:">
+						<select name="roll">
+                                <option value="admin">Admin</option>
+                                <option value="Limitado">Limitado</option>
+                            </select>
+						
+						
 						<input type="submit" name="enviar" value="Agregar Medico">
 						
 					</form>

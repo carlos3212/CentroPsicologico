@@ -7,6 +7,6 @@
 			<a href="consultorios.php" title="Consultorios">Consultorios</a>
             <a href="especialidades.php" >Especialidades</a>
 			<a href="usuarios.php" title="Usuarios">Usuarios</a>
-            <a href="#" title="Reportes">Reportes</a>
+            <a href="historiaclinica.php" title="Reportes">Histoira Clínica</a>
 	</div>
 </aside>

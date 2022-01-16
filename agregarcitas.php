@@ -4,17 +4,16 @@ if(!isset($_SESSION['usuario'])){
 }
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-
-	$citfecha = $_POST['fecha'];
-	$cithora = $_POST['hora'];
-	$citPaciente =  $_POST['paciente'];
-	$citMedico =  $_POST['medico'];
-	$citConsultorio =  $_POST['consultorio'];
-	$citestado =  $_POST['estado'];
-	$citobservaciones =  $_POST['observaciones'];
+	$nombre = filter_var(strtolower($_POST['nombres']),FILTER_SANITIZE_STRING);
+	$apellidos = $_POST['apellidos'];
+	$identificacion =  $_POST['identificacion'];
+	$fecha =  $_POST['fechaCita'];
+	$hora =  $_POST['hora'];
+	$consultorio =  $_POST['consultorio'];
+	$medico =  $_POST['medico'];
+	$estado =  $_POST['estado'];
 	$mensaje='';
-
-	if(empty($citfecha) or empty($cithora)  or empty($citConsultorio) or empty($citPaciente) or empty($citestado)or empty($citMedico)){
+	if(empty($nombre) or empty($apellidos)  or empty($identificacion)){
 		$mensaje.= 'Por favor rellena todos los datos correctamente'."<br />";
 	}
 	else{	
@@ -24,23 +23,31 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			echo "Error: ". $e->getMessage();
 			die();
 		}
+
+		$statement = $conexion -> prepare(
+			'SELECT * FROM citas WHERE citIdentificacion = :id LIMIT 1');
+		$statement ->execute(array(':id'=>$identificacion));
+		$resultado= $statement->fetch();
+
+		if($resultado != false){
+			$mensaje.='Ya existe una cita con esa identificación </br>';
+		}
 	}
 	if($mensaje==''){
 		$statement = $conexion->prepare(
-			'INSERT INTO citas values(null, :citfecha,:cithora,:citPaciente,:citMedico,:citConsultorio,:citestado,:citobservaciones)');
+		'INSERT INTO citas
+		values(null, :id,:nombre,:apellidos,:fecha,:hora,:consultorio,:medico, :estado)');
 
 		$statement ->execute(array(
-			':citfecha'=>$citfecha,
-			':cithora'=>$cithora,
-			':citPaciente'=>$citPaciente,
-			':citMedico'=>$citMedico,
-			':citConsultorio'=>$citConsultorio,
-			':citestado'=>$citestado,
-			':citobservaciones'=>$citobservaciones
+		':id'=>$identificacion,
+		':nombre'=> $nombre,
+		':apellidos'=>$apellidos,
+		':fecha'=>$fecha,
+		':hora'=>$hora,
+		':consultorio'=> $consultorio,
+		':medico'=> $medico,
+		':estado'=> $estado
 		));
-
-		#print_r($statement->errorInfo());exit;
-
 		header('Location: citas.php');
 	}
 }

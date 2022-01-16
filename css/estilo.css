@@ -169,6 +169,14 @@ form {
   border-radius:5px;
 
 }
+form1 {
+	margin: 2px auto;
+	border:1px solid #ccc;
+	padding: 15px;
+	text-align: left;
+	border-radius:5px;
+  
+  }
 form input, form textarea, form select {
   border: 0;
   outline: 0;
@@ -297,6 +305,18 @@ footer  p a:hover{
 	border:1px solid #ccc;
 }
 ul{
+	border-radius:5px;
+	margin-top:5px;
+	padding:5px;
+	border:1px solid #C40000;
+	background:rgba(196,0,0,.1);
+	font-size: 1.5em;
+	color: #C40000;
+	font-weight: bold;
+	box-shadow: 0 0px 15px #C40000 !important;
+	text-align:center;
+}
+ul1{
 	border-radius:5px;
 	margin-top:5px;
 	padding:5px;
